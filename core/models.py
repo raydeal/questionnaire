@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 
 
 class QuestionManager(models.Manager):
@@ -16,6 +16,8 @@ class User(AbstractUser):
     # 2-letter country name abbreviations
     country = models.CharField(max_length=2, default='UK')
 
+    objects = UserManager()
+    
     class Meta:
         db_table = 'auth_user'
         
@@ -31,7 +33,7 @@ class Question(models.Model):
     objects = QuestionManager()
     
     def __str__(self):
-        return self.title[:10]
+        return self.title[:50]
 
     
 class Answer(models.Model):

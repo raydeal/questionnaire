@@ -1,0 +1,26 @@
+[
+{
+    "model": "core.question",
+    "pk": 1,
+    "fields": {
+        "title": "What is your Favourite colour?",
+        "ordinal_number": 1
+    }
+},
+{
+    "model": "core.question",
+    "pk": 2,
+    "fields": {
+        "title": "What Car do you drive?",
+        "ordinal_number": 2
+    }
+},
+{
+    "model": "core.question",
+    "pk": 3,
+    "fields": {
+        "title": "What is your Favourite IDE?",
+        "ordinal_number": 3
+    }
+}
+]
