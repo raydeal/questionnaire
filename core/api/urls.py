@@ -1,5 +1,6 @@
-from django.urls import path, include
+from django.urls import include
 from rest_framework.routers import DefaultRouter
+from rest_framework.urls import url
 
 from .views import QuestionListView, AnswerViewSet
 
@@ -7,11 +8,10 @@ from .views import QuestionListView, AnswerViewSet
 router = DefaultRouter()
 router.register('answer', AnswerViewSet)
 
-API_VERSION = '1'
+API_VERSION = '(?P<version>v\d+)'
 
-# The API URLs are now determined automatically by the router.
 urlpatterns = [
-    path('auth/', include('rest_framework.urls')),
-    path('v{}/'.format(API_VERSION), include(router.urls)),
-    path('v{}/questions/'.format(API_VERSION), QuestionListView.as_view(), name='question-list')
+    url(f'{API_VERSION}/auth/', include('rest_framework.urls')),
+    url(f'{API_VERSION}/questions/', QuestionListView.as_view(), name='question-list'),
+    url(f'{API_VERSION}/', include(router.urls)),
 ]
