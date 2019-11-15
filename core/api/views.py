@@ -1,8 +1,12 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import QuestionSerializer, AnswerSerializer
+from .authentication import CustomUserAuthentication
+
 from ..models import Question, Answer
+
 
 class QuestionListView(ListAPIView):
     queryset = Question.objects.ordinal_ordered()
@@ -10,6 +14,11 @@ class QuestionListView(ListAPIView):
     
 
 class AnswerViewSet(ModelViewSet):
-    queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+    authentication_classes = [CustomUserAuthentication]
+
+    def get_queryset(self):
+        return self.request.user.answer_set
+
+    
 
