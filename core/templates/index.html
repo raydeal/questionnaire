@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Snap Dev Task{% endblock %}
+
+{% block content %}
+<h1>Snap Travel Tech Developer Task</h1>
+
+<h3>Basic URLs</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">URL</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="{% url 'admin:index' %}" target="_blank">Administration</a></td>
+      <td>Administration panel. Username: <i>super-mario</i> Password: <i>Mario2admin</i></td>
+    </tr>
+    <tr>
+      <td><a href="/api/v1/" target="_blank">REST API</a></td>
+      <td>Base site of REST API</td>
+    </tr>
+    <tr>
+      <td><a href="/api/auth/login/" target="_blank">Log in</a></td>
+      <td>Log in form to REST API</td>
+    </tr>
+  </tbody>
+</table>
+</br>
+<h3>Available Endpoints</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">URL</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="{% url 'user-list' 'v1' %}" target="_blank">User</a></td>
+      <td>User endpoint for create new staff and non staff users, listing users. <b>Only staff user has access to the endpoint.</b></td>
+    </tr>
+    <tr>
+      <td><a href="{% url 'question-list' 'v1' %}" target="_blank">Questions</a></td>
+      <td>Question List</td>
+    </tr>
+    <tr>
+      <td><a href="{% url 'answer-list' 'v1' %}" target="_blank">Answers</a></td>
+      <td>Answer endpoind for list of answers, creatin, modifying answer. User is authenticated by UUID.<br/>
+      URL <i>/api/v1/answer/?token=UUID</i></td>
+    </tr>
+    <tr>
+      <td><a href="{% url 'question-users' 'v1' %}" target="_blank">Filtered users list</a></td>
+      <td>Users list who answered any question. To filter the list use query parameters: <i>question</i> and <i>search</i></br>
+      E.g. <i>/api/v1/question-users/?question=1&search=red</i> returns list of users' email who answered "red" to first question.<br/>
+      <b>Only staff user has access to the endpoint.</b></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
