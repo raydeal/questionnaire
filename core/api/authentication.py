@@ -6,19 +6,22 @@ from django.core.exceptions import ValidationError
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 
+from .exceptions import InternalServerException
+
 
 logger = logging.getLogger(__name__)
 
 class CustomUserAuthentication(BaseAuthentication):
     
     def authenticate(self, request):
-        user_uuid = request.query_params.get('user_uuid')
-        if not user_uuid:
-            raise AuthenticationFailed('User UUID request parameter is required')
+        token = request.query_params.get('token')
+        if not token:
+            raise AuthenticationFailed('Token request parameter is required')
 
         User = get_user_model()
+        user = None
         try:
-            user = User.objects.get(uuid=user_uuid)
+            user = User.objects.get(uuid=token)
         except User.DoesNotExist:
             raise AuthenticationFailed('No such user')
         except ValidationError as ex:
@@ -26,6 +29,6 @@ class CustomUserAuthentication(BaseAuthentication):
             raise AuthenticationFailed(message)
         except Exception as ex:
             logger.exception(ex, exc_info=True, stack_info=True)
-            raise AuthenticationFailed('Something went wrong')
+            raise InternalServerException()
 
         return (user, None)
