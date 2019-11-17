@@ -34,7 +34,9 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-
+    question_text = serializers.CharField(
+        source='question.title', read_only=True)
+    
     class Meta:
         model = Answer
-        fields = ['id', 'question', 'answer', 'language']
+        fields = ['id', 'question', 'question_text', 'answer', 'language']
