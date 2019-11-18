@@ -14,8 +14,9 @@ RUN pip install -r requirements_dev.txt
 
 ADD . /usr/src/app
 
-RUN mkdir static
-RUN python manage.py collectstatic --noinput
+RUN mkdir db
+# RUN mkdir static
+# RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate
 RUN python manage.py loaddata --app core questions.json
 RUN python -c "import os; \

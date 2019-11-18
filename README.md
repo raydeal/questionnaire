@@ -36,6 +36,7 @@ Requirements:
 Run commands:
 ```shell
 pip install -r requirements_dev.txt
+mkdir db
 python manage.py migrate
 python manage.py loaddata --app core questions.json
 ```
