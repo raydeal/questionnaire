@@ -47,7 +47,7 @@ python manage.py createsuperuser --username super-mario --email super-mario@snap
 
 Run server:
 ```shell
-python manage.py runserver
+python manage.py runserver --insecure
 ```
 
 Now you in your browser the servis is available as URL: localhost:8000/
